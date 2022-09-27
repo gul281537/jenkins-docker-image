@@ -1,0 +1,26 @@
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+       - id: ${JENKINS_ADMIN_ID}
+         password: ${JENKINS_ADMIN_PASSWORD}
+       - id: guls
+         password: qwert
+#below code will provide authorization for users     
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "Overall/Administer:admin"
+        - "Overall/Read:authenticated"
+        - "Overall/Read:guls"
+        - "Job/Build:guls"
+        - "Job/Create:guls"
+        - "Job/Configure:guls"
+        
+#        - "Overall/View:guls"
+#  security:
+#    QueueItemAuthenticator:
+#      authenticators:
+#      - global:
+#          strategy: triggeringUsersAuthorizationStrategy
